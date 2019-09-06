@@ -1,1 +1,0 @@
-echo "-n -n 12" > $SPLUNK_HOME/var/run/splunk/push-version.txt && $SPLUNK_HOME/bin/splunk restart splunkweb

@@ -1,0 +1,22 @@
+<form script="vue-demo/index.js">
+  <label>Vue Demo</label>
+  <row>
+    <panel>
+      <html>
+        <div id="vue-app">{{ message }}</div>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <search>
+          <query>index=_internal sourcetype="$sourcetype$" source="$source$" | head | table _time, index, sourcetype, source</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="drilldown">none</option>
+      </table>
+    </panel>
+  </row>
+</form>

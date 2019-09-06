@@ -1,0 +1,52 @@
+# Application-level permissions
+
+[]
+access = read : [ * ], write : [ admin, power ]
+
+### EVENT TYPES
+
+[eventtypes]
+export = system
+
+
+### PROPS
+
+[props]
+export = system
+
+
+### TRANSFORMS
+
+[transforms]
+export = system
+
+
+### LOOKUPS
+
+[lookups]
+export = system
+
+
+### VIEWSTATES: even normal users should be able to create shared viewstates
+
+[viewstates]
+access = read : [ * ], write : [ * ]
+export = system
+
+
+[app/ui]
+version = 7.1.2
+modtime = 1566541787.862430000
+
+[app/launcher]
+version = 7.1.2
+modtime = 1566541787.864548000
+
+[views/vue_demo_dashboard]
+owner = admin
+version = 7.1.2
+modtime = 1566551424.880333000
+
+[views/vue-demo]
+version = 7.1.2
+modtime = 1567778944.259373000

@@ -1,0 +1,16 @@
+{
+  "name": "vue-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "bump": "sh bump.sh",
+    "build": "webpack-d",
+    "build-dist": "webpack",
+    "watch": "webpack -d --watch --progress",
+    "bb": "webpack -d && sh bump.sh"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^2.6.10"
+  }
+}
