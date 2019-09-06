@@ -12,7 +12,7 @@ require([
   'splunkjs/mvc/simplexml/ready!',
   'splunkjs/ready!'
 ], (mvc, Vue) => {
-  const mixinSplunkTokens = function (tokens, model) {
+  const mixinSplunkTokens = (tokens, model) => {
     const tokenModel = mvc.Components.get(model);
 
     return tokens.map(token => ({
@@ -28,7 +28,7 @@ require([
         }
       },
 
-      created: function () {
+      created () {
         tokenModel.on(`change:${token}`, this.updateOnTokenChange);
       },
 
