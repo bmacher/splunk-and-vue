@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "bump": "sh bump.sh",
-    "build": "webpack-d",
+    "bump": "sh ../../../../../bump.sh",
+    "build": "webpack -d",
     "build-dist": "webpack",
-    "watch": "webpack -d --watch --progress",
-    "bb": "webpack -d && sh bump.sh"
+    "bb": "yarn build && yarn bump",
+    "watch": "sh watch.sh"
   },
   "license": "MIT",
   "dependencies": {
-    "vue": "^2.6.10"
+    "apexcharts": "3.8.5",
+    "vue": "2.6.10",
+    "vue-apexcharts": "1.5.0"
   }
 }

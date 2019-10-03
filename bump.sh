@@ -6,5 +6,5 @@
  let bump++
  echo $bump > $SPLUNK_HOME/var/run/splunk/push-version.txt
  echo "New version: $bump"
- echo "Restarting Splunk..."
+ echo "Restarting Splunkweb..."
  $SPLUNK_HOME/bin/splunk restart splunkweb
