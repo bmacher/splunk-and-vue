@@ -16,23 +16,23 @@ require([
     const tokenModel = mvc.Components.get(model);
 
     return tokens.map(token => ({
-      data: function () {
+      data() {
         return {
           [token]: tokenModel.get(token)
         }
       },
 
       watch: {
-        [token]: function (value) {
+        [token](value) {
           tokenModel.set(token, value);
         }
       },
 
-      created () {
+      created() {
         tokenModel.on(`change:${token}`, this.updateOnTokenChange);
       },
 
-      destroyed () {
+      destroyed() {
         tokenModel.off(`change:${token}`, this.updateOnTokenChange);
       },
       
@@ -45,7 +45,7 @@ require([
   }
 
   new Vue({
-    mixins: [ ...mixinSplunkTokens(["sourcetype","source"], 'submitted') ],
+    mixins: [ ...mixinSplunkTokens(["sourcetype", "source"], 'submitted') ],
 
     template: `
       <div>

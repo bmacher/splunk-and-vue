@@ -8,7 +8,7 @@ require([
   'splunkjs/ready!'
 ], (mvc, SearchManager, VueDemo) => {
   
-  // Initalize VueDemo and pass mvc
+  // Initalize VueDemo and pass mvc + SearchManager
   VueDemo.init(mvc, SearchManager);
 
 });

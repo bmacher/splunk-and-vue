@@ -3,8 +3,9 @@ const path = require('path');
 module.exports = {
   resolve: {
     alias: {
+      'apexcharts$': 'apexcharts/dist/apexcharts.amd.js',
       // Use build with runtime
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
     }
   },
   
