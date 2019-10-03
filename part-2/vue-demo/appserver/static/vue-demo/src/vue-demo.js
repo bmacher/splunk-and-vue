@@ -1,33 +1,23 @@
 import Vue from 'vue';
 import VueApexCharts from 'vue-apexcharts';
+import mixinSplunkSearch from './splunk-search-mixin';
 
 Vue.component('apexchart', VueApexCharts);
 
-const SearchManagerConfig = {
-  'id': 'search1',
-  'status_buckets': 0,
-  'earliest_time': '-20m@m',
-  'latest_time': 'now',
-  'sample_ratio': 1,
-  'cancelOnUnload': true,
-  'search': 'index=_internal sourcetype IN (splunkd, splunk_web_service) | timechart span=1m count by sourcetype',
-  'app': 'vue-demo',
-  'auto_cancel': 90,
-  'preview': true,
-  'tokenDependencies': {
-  },
-  'runWhenTimeIsUndefined': false
-}
+const SEARCH_ID = 'vue-demo-search';
+const SEARCH = `
+  index=_internal sourcetype IN (splunkd, splunk_web_service) 
+  | timechart span=1m count by sourcetype
+`;
 
 export const init = (mvc, SearchManager) => {
   new Vue({
     name: 'vue-demo',
 
+    mixins: [ mixinSplunkSearch(SearchManager, SEARCH_ID, SEARCH) ],
+
     data() {
       return {
-        fields: undefined,
-        rows: undefined,
-
         options: {
           xaxis: {
             type: 'datetime'
@@ -40,10 +30,12 @@ export const init = (mvc, SearchManager) => {
     // [ "2019-09-05T21:00:00.000+02:00", "1209", "3558", "1800" ]
     computed: {
       series() {
-        if (!this.fields || !this.rows) return [];
+        if (!this[SEARCH_ID]) return [];
+
+        const { fields, rows } = this[SEARCH_ID];
 
         // Extract selected fields (remove _time, _span)
-        const selectedFields = this.fields.slice(1, -1);
+        const selectedFields = fields.slice(1, -1);
 
         // Initalize series
         const series = selectedFields.map(
@@ -51,7 +43,7 @@ export const init = (mvc, SearchManager) => {
         );
 
         // Fill data for each series
-        for (let row of this.rows) {
+        for (let row of rows) {
           const timestamp = (new Date(row[0])).getTime();
 
           // Remove values of _time, _span
@@ -64,20 +56,6 @@ export const init = (mvc, SearchManager) => {
 
         return series;
       }
-    },
-
-    created() {
-      // Create and start search
-      const searchManager = new SearchManager(SearchManagerConfig);
-      searchManager.startSearch();
-
-      // Subscribe to search
-      searchManager
-        .data('results')
-        .on('data', (model, { fields, rows }) => {
-          this.fields = fields;
-          this.rows = rows;
-        });
     },
 
     template: `
