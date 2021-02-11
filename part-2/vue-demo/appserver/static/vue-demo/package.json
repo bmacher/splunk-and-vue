@@ -11,7 +11,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "apexcharts": "3.8.5",
+    "apexcharts": "3.24.0",
     "vue": "2.6.10",
     "vue-apexcharts": "1.5.0"
   }
